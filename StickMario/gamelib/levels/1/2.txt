@@ -1,0 +1,54 @@
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+                                                                                                                                                                                            
+                                                                 1                                                                                                                         1
+                                                                 2                                                                                              X                          2           
+                                                                 2                                                                                              X                          2           
+                             1                                   2           LLL L L LLL L  L  L L LLL L L L                                                    X                          2           
+                             2                                   2           L   L L L   L L   L L L L L L L                                                    X                          2           
+                             2                             1     2           LL  L L L   LL     L  L L L L L           1                                        X                          2             L
+                             2 1                           2     2           L   L L L   L L    L  L L L L             2                                        X                          2            LL
+                             2 2                           2     2           L   LLL LLL L  L   L  LLL LLL L           2                                        X                          2 1         LLL
+                             2 2                           2   1 2                                                     2                                        X                          2 2        LLLL
+                             2 2                           2   2 2        QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ        2                                        X                          2 2       LLLLL
+                           3 2 2                           2 1 2 2                                                     2 1                                      X                          2 2      LLLLLL       E
+                           2 2 2                           2 2 2 2 3                                                   2 2                                      X                          2 2   3 LLLLLLL       L
+FFFFFFFFFFFFFFFFFFFFFFFFFFF2 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2 FF4 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFXXXXXXXXXXXXXXXXXXXXXXXXXXXFFFFFF2 FFFFFFFFFFFFFFFFFFFFFFFF
+                          B2  B                                                                                                                                    B                       B     2 BF
+                          B2  B                                                                                                                                    B                       B     2 BF
+                          B4  B                                                                                                                                    B                       B     2 BF
+                          B   B                                                                                                                                    B                       B     2 BF
+                          B   B                                                                                                                                    B                       B     2 BF
+                          B   BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBLLBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB                       BBBBBB2 BF
+                          B                                                     BB  BBBBBB  BBBB      BBBB                                                                                       2 BF
+                          B                                                     BB  BBBBBB  BBBB   S  BBBB                                                                                       2 BF
+                          B                                                   BB        BB   B    BB          CCCCCC                                                                             2 BF
+                          B                                        CCCC       BB        BB   B    BB                                                                 A              A            2 BF
+                          B                                                   BB        BB   B    BB          BBBBBB                                                                             2 BF
+                          B                                      B BBBB B     BB    CCCCBB   BCU  BB  S S     BBBBBB                                                                             4 BF
+                          B                            Q         BCB  BCB     BBBB  BBBBBB   BBB  BB  BBBB                             P                           S       BBBBBBU                 BF
+                          B         U0000        L L             BBB  BBB       BB                                               P     1                         SLL                               BF
+                          B                    L L L L   L                      BB                                               3     2     P      BB           LLL                      BBBBBBBBBBF
+                          B                  L L L L L   L L                                                                     2     2     3      BB          LLLL                      BBBBBBBBBBF
+                          B              SSL L L L L L S L L          GG             G  S S                                 S S S2     2     2      BB         LLLLL        R             BBBBBBBBBBF
+                          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF   FFFFFFFFFFFFFFFFFFFF2 FFFFFFFFFF2 FFF  FF  FFFFFFFFFFFF       FFFFFFFF       FFFFFFFFFFF
+Z                                                                                                                               B4 BBBBBBBBBB2 F                                                                          Z
+                                                                                                                                B  B        B2 F
+                                                                                                                                B  B        B2 F
+                                                                                                                                B  B        B2 F
+                                                                                                                                B  B        B2 F
+                                                                                                                                B  B        B2 F
+                                                                                                                                B  BBBBBBBBBB2 F
+                                                                                                                                B  BBBBBBBBBB2 F
+                                                                                                                                B  BBBBBBBBBB4 F
+                                                                                                                                B  BBBBBBBBBBBBF
+                                                                                                                                B            BBF
+                                                                                                                                B            BBF
+                                                                                                                                B   CCCCCCCC BBF
+                                                                                                                                B  BBBBBBBBBBBBF
+                                                                                                                                B            BBF
+                                                                                                                                B              F
+                                                                                                                                B  CCCCCCCCC   X
+                                                                                                                                FFFFFFFFFFFFFFFF                                                                                                                                                
