@@ -13,6 +13,7 @@ class Player(object):
         self.animtime=0
         self.score=0
         self.hptime=0
+        self.swimmingtime=0
         self.health=1
         self.lives=3
         self.firetime=0
@@ -174,6 +175,30 @@ class Player(object):
                         if not pygame.key.get_pressed()[pygame.K_w]or pygame.key.get_pressed()[pygame.K_UP]:
                             self.g=15
                     elif self.rect.y>comple.rect.y-50 and self.rect.y<comple.rect.y+75:
+                        if time.time()-self.hptime>2:
+                            self.col_enem()
+                            self.hptime=time.time()
+        for blooper in bloopers:
+            if self.rect.x>blooper.rect.x-30 and self.rect.x<blooper.rect.x+30:
+                if self.health>1:
+                    if self.rect.y>blooper.rect.y-(60*2)and self.rect.y<blooper.rect.y-(40*2):
+                        self.score+=100
+                        bloopers.remove(blooper)
+                        self.jump()
+                        if not pygame.key.get_pressed()[pygame.K_w]or pygame.key.get_pressed()[pygame.K_UP]:
+                            self.g=15
+                    elif self.rect.y>blooper.rect.y-(50*2)and self.rect.y<blooper.rect.y+50:
+                        if time.time()-self.hptime>2:
+                            self.col_enem()
+                            self.hptime=time.time()
+                if self.health==1:
+                    if self.rect.y>blooper.rect.y-60 and self.rect.y<blooper.rect.y-40:
+                        self.score+=100
+                        bloopers.remove(blooper)
+                        self.jump()
+                        if not pygame.key.get_pressed()[pygame.K_w]or pygame.key.get_pressed()[pygame.K_UP]:
+                            self.g=15
+                    elif self.rect.y>blooper.rect.y-50 and self.rect.y<blooper.rect.y+50:
                         if time.time()-self.hptime>2:
                             self.col_enem()
                             self.hptime=time.time()
@@ -679,7 +704,7 @@ class Pipe(object):
                     pipe.destination=(self.rect.x+25,self.rect.y+100)
 class Lava(object):
     def __init__(self,wx,wy):
-        self.rect=pygame.Rect(wx,wy,50,900)
+        self.rect=pygame.Rect(wx,wy,50,950)
 class FireBar(object):
     def __init__(self,wx,wy,direction,amount=0):
         self.rect=pygame.Rect(wx,wy,50,50)
@@ -793,6 +818,9 @@ class FireBar(object):
             else:
                 for turn in range(self.amount):
                     self.fireballs.append(pygame.Rect((self.rect.x+25),(self.rect.y+25)-8*(1+turn),8,8))
+class Blooper(object):
+    def __init__(self,wx,wy):
+        self.rect=pygame.Rect(wx,wy,50,50)
 class Bowser(object):
     def __init__(self,wx,wy):
         self.rect=pygame.Rect(wx,wy,100,100)
@@ -811,7 +839,7 @@ def everything(direction,otherdirection=0):
     direction=int(direction)
     otherdirection=int(otherdirection)
     if direction!=0:
-        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,plants,platforms,walls,movingplatforms,lavas,castlebricks]:
+        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,plants,platforms,walls,movingplatforms,lavas,castlebricks,bloopers]:
             for item in items:
                 item.rect.x+=direction
         for items in [coins,mushrects,flowers]:
@@ -837,7 +865,7 @@ def everything(direction,otherdirection=0):
         except:
             pass
     if otherdirection!=0:
-        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,platforms,walls,movingplatforms,lavas,castlebricks]:
+        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,platforms,walls,movingplatforms,lavas,castlebricks,bloopers]:
             for item in items:
                 item.rect.y+=otherdirection
         for items in [coins,mushrects,flowers]:
@@ -875,6 +903,7 @@ simples=[]
 complexs=[]
 shells=[]
 plants=[]
+bloopers=[]
 mushrects=[]
 flowers=[]
 spikes=[]
@@ -985,6 +1014,7 @@ castlebrickimg=pygame.image.load(folder+"sprites/blocks/castle.png")
 bowserimg=pygame.image.load(folder+"sprites/enemies/bowser/sprite.png")
 fireimg=pygame.image.load(folder+"sprites/enemies/bowser/fire.png")
 axeimg=pygame.image.load(folder+"sprites/axe.png")
+blooperimg=pygame.image.load(folder+"sprites/enemies/blooper.png")
 screen=pygame.display.set_mode((width,height),pygame.FULLSCREEN)
 clock=pygame.time.Clock()
 pygame.mouse.set_visible(False)
@@ -1064,7 +1094,7 @@ with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
             if col.upper()=="X":
                 spikes.append(Block(x,y))
             if col.upper()=="Y":
-                pass
+                bloopers.append(Blooper(x,y))
             if col.upper()=="Z":
                 leveledges.append(x)
             x+=50
@@ -1082,6 +1112,10 @@ while r:
     if not channel0.get_busy():
         channel0.play(music)
     screen.fill((255,255,255))
+    for lava in lavas:
+        if lava.rect.y>=-50 and lava.rect.y<=900 and lava.rect.x>=-50 and lava.rect.x<=1600:
+            screen.blit(lavaimg,(lava.rect.x,lava.rect.y))
+            pygame.draw.rect(screen,(88,88,88),pygame.Rect(lava.rect.x,lava.rect.y+10,50,940))
     user_input=pygame.key.get_pressed()
     levelChange=False
     for movingplatform in movingplatforms:
@@ -1139,6 +1173,7 @@ while r:
             complexs=[]
             shells=[]
             plants=[]
+            bloopers=[]
             mushrects=[]
             flowers=[]
             spikes=[]
@@ -1213,7 +1248,7 @@ while r:
                         if col.upper()=="X":
                             spikes.append(Block(x,y))
                         if col.upper()=="Y":
-                            pass
+                            bloopers.append(Blooper(x,y))
                         if col.upper()=="Z":
                             leveledges.append(x)
                         x+=50
@@ -1227,8 +1262,17 @@ while r:
     #Code to be improved :)/\
     if user_input[pygame.K_ESCAPE]:
         r=False
-    if (user_input[pygame.K_w]or user_input[pygame.K_UP])and not player.jumping:
+    player.lavacollision=False
+    for lava in lavas:
+        if player.rect.colliderect(lava.rect):
+            if player.g>15:
+                player.g=15
+            if player.g<-2:
+                player.g=-2
+            player.lavacollision=True
+    if (user_input[pygame.K_w]or user_input[pygame.K_UP])and(not player.jumping or player.lavacollision)and time.time()-player.swimmingtime>0.3:
         player.jump()
+        player.swimmingtime=time.time()
     elif player.jumping:
         player.move(dy=-player.g)
         if player.g>-25:
@@ -1241,6 +1285,10 @@ while r:
         if not player.collision:
             player.g=0
             player.jumping=True
+    if player.lavacollision:
+        player.move(dy=-player.g)
+        if player.g>-2:
+            player.g-=1
     if (user_input[pygame.K_a]or user_input[pygame.K_LEFT])and not player.runningleft:
         player.runningleft=True
         player.rg=5
@@ -1335,8 +1383,10 @@ while r:
             if comple.wings and comple.direction=="l":
                 screen.blit(comple.wingimage,(comple.rect.x+30,comple.rect.y))
             elif comple.wings:
-                
                 screen.blit(comple.wingimage,(comple.rect.x+5,comple.rect.y))
+    for blooper in bloopers:
+        if blooper.rect.y>=0 and blooper.rect.y<=900 and blooper.rect.x>=-50 and blooper.rect.x<=1600:
+            screen.blit(blooperimg,(blooper.rect.x,blooper.rect.y))
     for shell in shells:
         if shell.rect.y>=0 and shell.rect.y<=900 and shell.rect.x>=-50 and shell.rect.x<=1600:
             if shell.hit and time.time()-shell.time:
@@ -1440,10 +1490,6 @@ while r:
     screen.blit(player_label,(player.rect.x-player_label_width+25,player.rect.y-50))
     if(time.time()-player.hptime>2)or(time.time()-player.hptime>1.8 and time.time()-player.hptime<1.9)or(time.time()-player.hptime>1.6 and time.time()-player.hptime<1.7)or(time.time()-player.hptime>1.4 and time.time()-player.hptime<1.5)or(time.time()-player.hptime>1.2 and time.time()-player.hptime<1.3)or(time.time()-player.hptime>1.0 and time.time()-player.hptime<1.1)or(time.time()-player.hptime>0.8 and time.time()-player.hptime<0.9)or(time.time()-player.hptime>0.6 and time.time()-player.hptime<0.7)or(time.time()-player.hptime>0.4 and time.time()-player.hptime<0.5)or(time.time()-player.hptime>0.2 and time.time()-player.hptime<0.3)or(time.time()-player.hptime>0.0 and time.time()-player.hptime<0.1):
         screen.blit(player.image,(player.rect.x-5,player.rect.y))
-    for lava in lavas:
-        if lava.rect.y>=0 and lava.rect.y<=900 and lava.rect.x>=-50 and lava.rect.x<=1600:
-            screen.blit(lavaimg,(lava.rect.x,lava.rect.y))
-            pygame.draw.rect(screen,(88,88,88),pygame.Rect(lava.rect.x,lava.rect.y+10,50,890))
     try:
         if flagrect.x>=-50 and flagrect.x<=1600 and flagrect.y>=0 and flagrect.y<=900:
             screen.blit(flagimg,(flagrect.x,flagrect.y))

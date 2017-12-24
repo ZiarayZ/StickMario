@@ -1,25 +1,37 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-E
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                                                                                                                                                                                                   
+                             1                                                                                                                                                                     
+                             2                                                                                                                                                                                                            LL
+                             2                                                                                                                                                                                                           LLL
+                             2 1                                                                                                                                                                                                        LLLL
+                             2 2                                                                                                                                                                                                       LLLLL
+                             2 2                                                                                                                                                                                                      LLLLLL
+                             2 2                                                                                                                                                                                                 P   LLLLLLL
+                           3 2 2                                                                                                                                                                                                 3  LLLLLLLL        E
+                           2 2 2                                                                                                                                                                                              FFF2 LLLLLLLLL        L
+FFFFFFFFFFFFFFFFFFFFFFFFFFF4 FFFFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV2 FFFFFFFFFFFFFFFFFF
+VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV                                                                               FF                                                   F                                                          F2 F                 
+                                                                                                                FF                                                   F                                                          F2 F                 
+                                                                                                                FF                                                   F                                                          F2 F                 
+                                                                                                                FF                                                   F                                                          F2 F                 
+                                                                                                                FF                                                   F                                                          F2 F                 
+                                                                                                                FF                                                   F                                                          F2 F                 
+                                                                                                                FF                                                   F                                                          F2 F                 
+                                                                                                                FF                                                   F                                                          F2 F                 
+                                                                                                                FF              Y                                    F                                                          F2 F                 
+                                                            CCC                                                     FFF                                              FFFFFFFFF                FFF   FFF       FFFFF   FFFF      F4 F                 
+                                                                                                                                                   CCC                                        F       F                         FVVF                 
+                                                                                                                                                                                              F       F                            F                 
+                                                                                                   F     F                                           FF                                       F       F                            F                 
+                                                   FFF                     FFF                     F     F           Y                  FF                         F           F              F  CCC  F       FFFFF   FFFF    FFFFFF                 
+                                                                                Y                 FF CCC FF     FF                                                 F           F              F       F                      FFFFFFF                 
+                                                                                         Y        FF     FF     FF                     CCC                         FF  C   C  FF              F       F                     FFFFFFFF                 
+                                               CC      Y             CCC                          FF     FF     FF                         Y                       FF   CCC   FF              F  CCC  F                    FFFFFFFFF                 
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF     FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF         FFFFFFFFFFFFFFFFF       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF                 
+Z                                                                                                                                                                                                                  Z
