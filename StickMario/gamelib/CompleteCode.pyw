@@ -124,10 +124,10 @@ class Player(object):
                         self.g=0
         for movingplatform in movingplatforms:
             if movingplatform.rect.colliderect(self.rect)and dy>0:
-				if (movingplatform.rect.y>self.rect.y+75 and self.health>1)or(movingplatform.rect.y>self.rect.y+25 and self.health==1):
-					self.rect.bottom=movingplatform.rect.top
-					self.g=0
-					self.jumping=False
+                if (movingplatform.rect.y>self.rect.y+75 and self.health>1)or(movingplatform.rect.y>self.rect.y+25 and self.health==1):
+                        self.rect.bottom=movingplatform.rect.top
+                        self.g=0
+                        self.jumping=False
         for simple in simples:
             if self.rect.x>simple.rect.x-30 and self.rect.x<simple.rect.x+30:
                 if self.health>1:
@@ -233,6 +233,37 @@ class Player(object):
                 if self.rect.colliderect(item.rect)and time.time()-self.hptime>2:
                     self.col_enem()
                     self.hptime=time.time()
+        for beetle in beetles:
+            if beetle.type=="SPINY":
+                if self.rect.colliderect(beetle.rect)and time.time()-self.hptime>2:
+                    self.col_enem()
+                    self.hptime=time.time()
+            if beetle.type=="BUZZY":
+                if self.rect.x>beetle.rect.x-30 and self.rect.x<beetle.rect.x+30:
+                    if self.health>1:
+                        if self.rect.y>beetle.rect.y-(60*2)and self.rect.y<beetle.rect.y-(40*2):
+                            self.score+=100
+                            shells.append(Shell(beetle.rect.x,beetle.rect.y,"GREEN"))
+                            beetles.remove(beetle)
+                            self.jump()
+                            if not pygame.key.get_pressed()[pygame.K_w]or pygame.key.get_pressed()[pygame.K_UP]:
+                                self.g=15
+                        elif self.rect.y>beetle.rect.y-(50*2)and self.rect.y<beetle.rect.y+50:
+                            if time.time()-self.hptime>2:
+                                self.col_enem()
+                                self.hptime=time.time()
+                    if self.health==1:
+                        if self.rect.y>beetle.rect.y-60 and self.rect.y<beetle.rect.y-40:
+                            self.score+=100
+                            shells.append(Shell(beetle.rect.x,beetle.rect.y,"GREEN"))
+                            beetles.remove(beetle)
+                            self.jump()
+                            if not pygame.key.get_pressed()[pygame.K_w]or pygame.key.get_pressed()[pygame.K_UP]:
+                                self.g=15
+                        elif self.rect.y>beetle.rect.y-50 and self.rect.y<beetle.rect.y+50:
+                            if time.time()-self.hptime>2:
+                                self.col_enem()
+                                self.hptime=time.time()
         for firebar in firebars:
             for fireball in firebar.fireballs:
                 if self.rect.colliderect(fireball):
@@ -446,8 +477,8 @@ class MovingPlatform(object):
             if self.rect.y>=900:
                 self.rect.y=-24
             if self.rect.colliderect(player.rect):
-				if (self.rect.y>player.rect.y+75 and player.health>1)or(self.rect.y>player.rect.y+25 and player.health==1):
-					player.rect.bottom=self.rect.top
+                if (self.rect.y>player.rect.y+75 and player.health>1)or(self.rect.y>player.rect.y+25 and player.health==1):
+                        player.rect.bottom=self.rect.top
 class Simple(object):
     def __init__(self,wx,wy):
         self.rect=pygame.Rect(wx,wy,50,50)
@@ -890,6 +921,72 @@ class Hammer(object):
         if self.rect.colliderect(player.rect)and time.time()-player.hptime>2:
             player.col_enem()
             player.hptime=time.time()
+class Beetle(object):
+    def __init__(self,wx,wy,obj):
+        self.rect=pygame.Rect(wx,wy,50,50)
+        self.type=obj
+        self.speed=-2
+        self.animtime=0
+        self.direction="l"
+    def move(self):
+        self.rect.x+=self.speed
+        for items in [grounds,bricks,blocks,questions,pipes,platforms,castlebricks,firebars]:
+            for item in items:
+                if item.rect.colliderect(self.rect):
+                    self.speed=-self.speed
+                    self.rect.x+=self.speed
+        for simple in simples:
+            if simple.rect.colliderect(self.rect):
+                self.speed=-self.speed
+        for comple in complexs:
+            if comple.rect.colliderect(self.rect):
+                self.speed=-self.speed
+        if dx>0:
+            self.animation("r")
+        if dx<0:
+            self.animation("l")
+        self.rect.y+=10
+        self.rect.x+=self.speed*25
+        self.collision=False
+        self.blockcollision=False
+        for block in blocks:
+            if block.rect.colliderect(self.rect):
+                self.blockcollision=True
+        if not self.blockcollision:
+            self.collision=True
+        for items in [grounds,bricks,questions,pipes,platforms,castlebricks,firebars]:
+            for item in items:
+                if item.rect.colliderect(self.rect):
+                    self.collision=True
+        if not self.collision:
+            self.rect.y-=10
+            self.speed=-self.speed
+            self.rect.x+=self.speed*25
+        else:
+            self.rect.x-=self.speed*25
+        for items in [grounds,blocks,bricks,questions,pipes,platforms,movingplatforms,castlebricks,firebars]:
+            for item in items:
+                if item.rect.colliderect(self.rect):
+                    self.rect.bottom=item.rect.top
+    def animation(self,direction):
+        self.direction=direction
+        if time.time()-self.animtime>0.3:
+            self.animtime=time.time()
+        elif time.time()-self.animtime>0.2:
+            if direction=="r":
+                self.image=sb3r
+            else:
+                self.image=sb3l
+        elif time.time()-self.animtime>0.1:
+            if direction=="r":
+                self.image=sb2r
+            else:
+                self.image=sb2l
+        else:
+            if direction=="r":
+                self.image=sb1r
+            else:
+                self.image=sb1l
 class Bowser(object):
     def __init__(self,wx,wy,health):
         self.rect=pygame.Rect(wx,wy,100,100)
@@ -983,6 +1080,7 @@ plants=[]
 bloopers=[]
 podoboos=[]
 brothers=[]
+beetles=[]
 mushrects=[]
 flowers=[]
 spikes=[]
@@ -1095,13 +1193,19 @@ fireimg=pygame.image.load(folder+"sprites/enemies/bowser/fire.png")
 axeimg=pygame.image.load(folder+"sprites/axe.png")
 blooperimg=pygame.image.load(folder+"sprites/enemies/blooper.png")
 podobooimg=pygame.image.load(folder+"sprites/enemies/podoboo.png")
+sb1l=pygame.image.load(folder+"sprites/enemies/beetle/spiny/left/1.png")
+sb2l=pygame.image.load(folder+"sprites/enemies/beetle/spiny/left/2.png")
+sb3l=pygame.image.load(folder+"sprites/enemies/beetle/spiny/left/2.png")
+sb1r=pygame.image.load(folder+"sprites/enemies/beetle/spiny/right/1.png")
+sb2r=pygame.image.load(folder+"sprites/enemies/beetle/spiny/right/2.png")
+sb3r=pygame.image.load(folder+"sprites/enemies/beetle/spiny/right/3.png")
 screen=pygame.display.set_mode((width,height),pygame.FULLSCREEN)
 clock=pygame.time.Clock()
 pygame.mouse.set_visible(False)
 player=Player(0,750)
 #Code to be improved :)\/
 area=1
-level=4
+level=1
 BOWSERhealth=7
 charactertime=0
 volume=0
@@ -1120,6 +1224,10 @@ with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
                 podoboos.append(Podoboo(x,y))
             if str(col)=="6":
                 brothers.append(Brother(x,y))
+            if str(col)=="7":
+                beetles.append(Beetle(x,y,"SPINY"))
+            if str(col)=="8":
+                beetles.append(Beetle(x,y,"BUZZY"))
             if col.upper()=="A":
                 movingplatforms.append(MovingPlatform(x,y))
             if col.upper()=="B":
