@@ -123,11 +123,11 @@ class Player(object):
                         self.rect.top=item.rect.bottom
                         self.g=0
         for movingplatform in movingplatforms:
-            if movingplatform.rect.colliderect(self.rect):
-                if dy>0:
-                    self.rect.bottom=movingplatform.rect.top
-                    self.g=0
-                    self.jumping=False
+            if movingplatform.rect.colliderect(self.rect)and dy>0:
+				if (movingplatform.rect.y>self.rect.y+75 and self.health>1)or(movingplatform.rect.y>self.rect.y+25 and self.health==1):
+					self.rect.bottom=movingplatform.rect.top
+					self.g=0
+					self.jumping=False
         for simple in simples:
             if self.rect.x>simple.rect.x-30 and self.rect.x<simple.rect.x+30:
                 if self.health>1:
@@ -178,6 +178,32 @@ class Player(object):
                         if time.time()-self.hptime>2:
                             self.col_enem()
                             self.hptime=time.time()
+        for brother in brothers:
+            if self.rect.x>brother.rect.x-30 and self.rect.x<brother.rect.x+30:
+                if self.health>1:
+                    if self.rect.y>brother.rect.y-((60*2)+25)and self.rect.y<brother.rect.y-((40*2)+25):
+                        self.score+=100
+                        brothers.remove(brother)
+                        shells.append(Shell(brother.rect.x,brother.rect.y+47,"GREEN"))
+                        self.jump()
+                        if not pygame.key.get_pressed()[pygame.K_w]or pygame.key.get_pressed()[pygame.K_UP]:
+                            self.g=15
+                    elif self.rect.y>brother.rect.y-(50*2)and self.rect.y<brother.rect.y+75:
+                        if time.time()-self.hptime>2:
+                            self.col_enem()
+                            self.hptime=time.time()
+                if self.health==1:
+                    if self.rect.y>brother.rect.y-85 and self.rect.y<brother.rect.y-65:
+                        self.score+=100
+                        brothers.remove(brother)
+                        shells.append(Shell(brother.rect.x,brother.rect.y+47,"GREEN"))
+                        self.jump()
+                        if not pygame.key.get_pressed()[pygame.K_w]or pygame.key.get_pressed()[pygame.K_UP]:
+                            self.g=15
+                    elif self.rect.y>brother.rect.y-50 and self.rect.y<brother.rect.y+75:
+                        if time.time()-self.hptime>2:
+                            self.col_enem()
+                            self.hptime=time.time()
         for blooper in bloopers:
             if self.rect.x>blooper.rect.x-30 and self.rect.x<blooper.rect.x+30:
                 if self.health>1:
@@ -202,9 +228,9 @@ class Player(object):
                         if time.time()-self.hptime>2:
                             self.col_enem()
                             self.hptime=time.time()
-        for plant in plants:
-            if self.rect.colliderect(plant.rect):
-                if time.time()-self.hptime>2:
+        for items in[plants,podoboos]:
+            for item in items:
+                if self.rect.colliderect(item.rect)and time.time()-self.hptime>2:
                     self.col_enem()
                     self.hptime=time.time()
         for firebar in firebars:
@@ -420,7 +446,8 @@ class MovingPlatform(object):
             if self.rect.y>=900:
                 self.rect.y=-24
             if self.rect.colliderect(player.rect):
-                player.rect.bottom=self.rect.top
+				if (self.rect.y>player.rect.y+75 and player.health>1)or(self.rect.y>player.rect.y+25 and player.health==1):
+					player.rect.bottom=self.rect.top
 class Simple(object):
     def __init__(self,wx,wy):
         self.rect=pygame.Rect(wx,wy,50,50)
@@ -821,10 +848,52 @@ class FireBar(object):
 class Blooper(object):
     def __init__(self,wx,wy):
         self.rect=pygame.Rect(wx,wy,50,50)
-class Bowser(object):
+class Podoboo(object):
     def __init__(self,wx,wy):
+        self.rect=pygame.Rect(wx,wy,50,50)
+        self.g=0
+    def move(self):
+        self.rect.y-=self.g
+        self.g-=1
+        if self.rect.y>900:
+            self.g=random.randint(20,30)
+class Brother(object):
+    def __init__(self,wx,wy):
+        self.rect=pygame.Rect(wx,wy-25,50,75)
+        self.hammers=[]
+        self.time=0
+    def attack(self):
+        if self.rect.x<player.rect.x+800 and self.rect.x>player.rect.x and time.time()-self.time>1:
+            self.hammers.append(Hammer(self.rect.x,self.rect.y,"l"))
+            self.image=cg1l
+            self.time=time.time()
+        if self.rect.x<player.rect.x and self.rect.x>player.rect.x-800 and time.time()-self.time>1:
+            self.hammers.append(Hammer(self.rect.x+50,self.rect.y,"r"))
+            self.image=cg1r
+            self.time=time.time()
+        for hammer in self.hammers:
+            if hammer.rect.y>=900 or hammer.rect.x<=0 or hammer.rect.x>=1625:
+                self.hammers.remove(hammer)
+            hammer.move()
+class Hammer(object):
+    def __init__(self,wx,wy,obj):
+        self.rect=pygame.Rect(wx,wy,25,25)
+        self.g=10
+        self.obj=obj
+    def move(self):
+        self.rect.y-=self.g
+        self.g-=1
+        if self.obj=="r":
+            self.rect.x+=random.randint(8,10)
+        else:
+            self.rect.x-=random.randint(8,10)
+        if self.rect.colliderect(player.rect)and time.time()-player.hptime>2:
+            player.col_enem()
+            player.hptime=time.time()
+class Bowser(object):
+    def __init__(self,wx,wy,health):
         self.rect=pygame.Rect(wx,wy,100,100)
-        self.health=7
+        self.health=health
         self.time=0
         self.fire=[]
     def attack(self):
@@ -839,7 +908,7 @@ def everything(direction,otherdirection=0):
     direction=int(direction)
     otherdirection=int(otherdirection)
     if direction!=0:
-        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,plants,platforms,walls,movingplatforms,lavas,castlebricks,bloopers]:
+        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,plants,platforms,walls,movingplatforms,lavas,castlebricks,bloopers,podoboos]:
             for item in items:
                 item.rect.x+=direction
         for items in [coins,mushrects,flowers]:
@@ -855,6 +924,10 @@ def everything(direction,otherdirection=0):
             firebar.rect.x+=direction
             for fireball in firebar.fireballs:
                 fireball.x+=direction
+        for brother in brothers:
+            brother.rect.x+=direction
+            for hammer in brother.hammers:
+                hammer.rect.x+=direction
         for fireball in player.fireballs:
             fireball.rect.x+=direction
         player.rect.x+=direction
@@ -865,7 +938,7 @@ def everything(direction,otherdirection=0):
         except:
             pass
     if otherdirection!=0:
-        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,platforms,walls,movingplatforms,lavas,castlebricks,bloopers]:
+        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,platforms,walls,movingplatforms,lavas,castlebricks,bloopers,podoboos]:
             for item in items:
                 item.rect.y+=otherdirection
         for items in [coins,mushrects,flowers]:
@@ -878,6 +951,10 @@ def everything(direction,otherdirection=0):
             firebar.rect.y+=otherdirection
             for fireball in firebar.fireballs:
                 fireball.y+=otherdirection
+        for brother in brothers:
+            brother.rect.y+=otherdirection
+            for hammer in brother.hammers:
+                hammer.rect.y+=otherdirection
         try:
             bowser.rect.y+=otherdirection
             for fire in bowser.fire:
@@ -904,6 +981,8 @@ complexs=[]
 shells=[]
 plants=[]
 bloopers=[]
+podoboos=[]
+brothers=[]
 mushrects=[]
 flowers=[]
 spikes=[]
@@ -1015,13 +1094,15 @@ bowserimg=pygame.image.load(folder+"sprites/enemies/bowser/sprite.png")
 fireimg=pygame.image.load(folder+"sprites/enemies/bowser/fire.png")
 axeimg=pygame.image.load(folder+"sprites/axe.png")
 blooperimg=pygame.image.load(folder+"sprites/enemies/blooper.png")
+podobooimg=pygame.image.load(folder+"sprites/enemies/podoboo.png")
 screen=pygame.display.set_mode((width,height),pygame.FULLSCREEN)
 clock=pygame.time.Clock()
 pygame.mouse.set_visible(False)
 player=Player(0,750)
 #Code to be improved :)\/
-level=1
 area=1
+level=4
+BOWSERhealth=7
 charactertime=0
 volume=0
 breaktime=0
@@ -1035,6 +1116,10 @@ with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
                 questions[-1].item="COIN"
             if str(col)in"1234":
                 pipes.append(Pipe(x,y,col))
+            if str(col)=="5":
+                podoboos.append(Podoboo(x,y))
+            if str(col)=="6":
+                brothers.append(Brother(x,y))
             if col.upper()=="A":
                 movingplatforms.append(MovingPlatform(x,y))
             if col.upper()=="B":
@@ -1069,7 +1154,8 @@ with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
             if col.upper()=="N":
                 firebars.append(FireBar(x,y,"a"))
             if col.upper()=="O":
-                bowser=Bowser(x,y)
+                bowser=Bowser(x,y,BOWSERhealth)
+                BOWSERhealth+=1
             if col.upper()=="P":
                 plants.append(Plant(x,y))
             if col.upper()=="Q":
@@ -1157,6 +1243,8 @@ while r:
             if level==5:
                 level=1
                 area+=1
+                player.health=1
+                player.rect=pygame.Rect(player.rect.x,player.rect.y,50,50)
                 if area==9:
                     r=False
             grounds=[]
@@ -1174,6 +1262,8 @@ while r:
             shells=[]
             plants=[]
             bloopers=[]
+            podoboos=[]
+            brothers=[]
             mushrects=[]
             flowers=[]
             spikes=[]
@@ -1189,6 +1279,10 @@ while r:
                             questions[-1].item="COIN"
                         if str(col)in"1234":
                             pipes.append(Pipe(x,y,col))
+                        if str(col)=="5":
+                            podoboos.append(Podoboo(x,y))
+                        if str(col)=="6":
+                            brothers.append(Brother(x,y))
                         if col.upper()=="A":
                             movingplatforms.append(MovingPlatform(x,y))
                         if col.upper()=="B":
@@ -1223,7 +1317,8 @@ while r:
                         if col.upper()=="N":
                             firebars.append(FireBar(x,y,"a"))
                         if col.upper()=="O":
-                            bowser=Bowser(x,y)
+                            bowser=Bowser(x,y,BOWSERhealth)
+                            BOWSERhealth+=1
                         if col.upper()=="P":
                             plants.append(Plant(x,y))
                         if col.upper()=="Q":
@@ -1264,7 +1359,7 @@ while r:
         r=False
     player.lavacollision=False
     for lava in lavas:
-        if player.rect.colliderect(lava.rect):
+        if player.rect.colliderect(lava.rect)and player.rect.y>lava.rect.y+110:
             if player.g>15:
                 player.g=15
             if player.g<-2:
@@ -1387,6 +1482,17 @@ while r:
     for blooper in bloopers:
         if blooper.rect.y>=0 and blooper.rect.y<=900 and blooper.rect.x>=-50 and blooper.rect.x<=1600:
             screen.blit(blooperimg,(blooper.rect.x,blooper.rect.y))
+    for brother in brothers:
+        brother.attack()
+        for hammer in brother.hammers:
+            if hammer.obj=="r":
+                pygame.draw.rect(screen,(0,0,0),pygame.Rect(hammer.rect.x+13,hammer.rect.y,12,25))
+                pygame.draw.rect(screen,(0,0,0),pygame.Rect(hammer.rect.x,hammer.rect.y+11,13,3))
+            else:
+                pygame.draw.rect(screen,(0,0,0),pygame.Rect(hammer.rect.x,hammer.rect.y,12,25))
+                pygame.draw.rect(screen,(0,0,0),pygame.Rect(hammer.rect.x+12,hammer.rect.y+11,13,3))
+        if brother.rect.y>=0 and brother.rect.y<=900 and brother.rect.x>=-50 and brother.rect.x<=1600:
+            screen.blit(brother.image,(brother.rect.x,brother.rect.y))
     for shell in shells:
         if shell.rect.y>=0 and shell.rect.y<=900 and shell.rect.x>=-50 and shell.rect.x<=1600:
             if shell.hit and time.time()-shell.time:
@@ -1438,6 +1544,10 @@ while r:
             screen.blit(shell.image,(shell.rect.x,shell.rect.y))
         else:
             shells.remove(shell)
+    for podoboo in podoboos:
+        if podoboo.rect.y>=0 and podoboo.rect.y<=1800 and podoboo.rect.x>=-50 and podoboo.rect.x<=1600:
+            podoboo.move()
+            screen.blit(podobooimg,(podoboo.rect.x,podoboo.rect.y))
     for plant in plants:
         if plant.rect.y>=0 and plant.rect.y<=900 and plant.rect.x>=-50 and plant.rect.x<=1600:
             plant.move()

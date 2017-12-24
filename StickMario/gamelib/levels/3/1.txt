@@ -6,14 +6,32 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-E
+                                                                                                                                                       G                                      G
+                                                                                M        BBB                  BB0BBBUBBB        BBQ                  B0B  B0B                                LL
+                                                                                                                                                                                           GLLL
+                                                                                                                                           SL                                 L            LLLL
+                   0  U               P                                         S S S                 P         6               BBB       SLL                            G    L           LLLLL             L L
+                0         BBB   P     3                 P   B              LBBBBBBBBL  L              1       BBBBBBBBBBB                 LLL        B0B  BUB        B0BBB    L          LLLLLL             BBB
+                                1     2                 1         P       LL        L  L              2                                  LLLL                                LL         LLLLLLL            LBBBL
+                            H   2     2                 2         3      LLL        L  LL             2                                 LLLLL                          H     LL        LLLLLLLL        E   BB BB
+                         H      2    S2             S SS2       G 2     LLLLVVVVVVVVLVVLL    S S    G 2            6                   LLLLLL       G    S SS       H     H  LL       LLLLLLLLL        L   BB BB
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2FFFFF   FFFFFFFFF2FFFFFFFFF2FFFFFFFFF        F  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF    FFFFFFFFFF  FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF   FFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVB4                 2         2 VVVVVVVV        V  VV
+                                     B      CC          2         2
+                                     B     CCCC         2         2
+                                     B  BBM BB BBB      2         2
+                                     B  BB CBBC BB      2         2
+                                     B  B CB  BC B      2         2
+                                     B  BCB    BCB      2         2
+                                     B   B      B       2         2
+                                     B                  2         2
+                                     B                  1         2
+                                     B                            2
+                                     B                            2
+                                     FFFFFFFFFFFFFFFFFFFF         FFF
+                                     VVVVVVVVVVVVVVVVVVVFF        4 F
+                                                        VF          F
+                                                         FF         F
+                                                         VFFFFFFFFFFF
+                                                          VVVVVVVVVV
+Z                                                                                                                                                                                                              Z
