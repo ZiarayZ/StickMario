@@ -1,5 +1,1 @@
-Traceback (most recent call last):
-  File "pyg.py", line 22, in <module>
-  File "runpy.pyc", line 239, in run_path
-  File "runpy.pyc", line 215, in _get_code_from_file
-IOError: [Errno 2] No such file or directory: 'CompleteCode.py'
+
