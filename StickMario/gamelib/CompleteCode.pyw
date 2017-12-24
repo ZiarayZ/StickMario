@@ -817,7 +817,10 @@ def everything(direction,otherdirection=0):
         for items in [coins,mushrects,flowers]:
             for item in items:
                 item.x+=direction
-        flagrect.x+=direction
+        try:
+            flagrect.x+=direction
+        except:
+            axerect.x+=direction
         leveledges[0]+=direction
         leveledges[1]+=direction
         for firebar in firebars:
@@ -853,7 +856,10 @@ def everything(direction,otherdirection=0):
                 fire.y+=otherdirection
         except:
             pass
-        flagrect.y+=otherdirection
+        try:
+            flagrect.y+=otherdirection
+        except:
+            axerect.y+=otherdirection
         player.rect.y+=otherdirection
 grounds=[]
 bricks=[]
@@ -978,6 +984,7 @@ lavaimg=pygame.image.load(folder+"sprites/lava.png")
 castlebrickimg=pygame.image.load(folder+"sprites/blocks/castle.png")
 bowserimg=pygame.image.load(folder+"sprites/enemies/bowser/sprite.png")
 fireimg=pygame.image.load(folder+"sprites/enemies/bowser/fire.png")
+axeimg=pygame.image.load(folder+"sprites/axe.png")
 screen=pygame.display.set_mode((width,height),pygame.FULLSCREEN)
 clock=pygame.time.Clock()
 pygame.mouse.set_visible(False)
@@ -1008,6 +1015,10 @@ with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
                 complexs.append(Complex(x,y,"RED",True))
             if col.upper()=="E":
                 flagrect=pygame.Rect(x,y-350,50,400)
+                try:
+                    del axerect
+                except:
+                    pass
             if col.upper()=="F":
                 grounds.append(Block(x,y))
             if col.upper()=="G":
@@ -1037,6 +1048,12 @@ with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
                 complexs.append(Complex(x,y,"RED",False))
             if col.upper()=="S":
                 simples.append(Simple(x,y))
+            if col.upper()=="T":
+                axerect=pygame.Rect(x,y,50,50)
+                try:
+                    del flagrect
+                except:
+                    pass
             if col.upper()=="U":
                 questions.append(Question(x,y))
                 questions[-1].item="UPGRADE"
@@ -1046,6 +1063,8 @@ with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
                 walls.append(Block(x,y))
             if col.upper()=="X":
                 spikes.append(Block(x,y))
+            if col.upper()=="Y":
+                pass
             if col.upper()=="Z":
                 leveledges.append(x)
             x+=50
@@ -1070,14 +1089,20 @@ while r:
             movingplatform.move(dy=-7)
             if movingplatform.rect.y>=0 and movingplatform.rect.y<=900:
                 screen.blit(movingplatformimg,(movingplatform.rect.x,movingplatform.rect.y))
-    if player.rect.colliderect(flagrect):
-        try:
-            del bowser
-        except:
-            pass
-        player.score+=5000
-        levelChange=True
-        level+=1
+    try:
+        if player.rect.colliderect(flagrect):
+            player.score+=5000
+            levelChange=True
+            level+=1
+    except:
+        if player.rect.colliderect(axerect):
+            player.score+=10000
+            levelChange=True
+            level+=1
+            try:
+                del bowser
+            except:
+                pass
     if player.rect.y>=900:
         player.lives-=1
         levelChange=True
@@ -1094,96 +1119,111 @@ while r:
         r=False
     #Code to be improved :)\/
     if levelChange:
-        if level==5:
-            level=1
-            area+=1
-            if area==9:
-                r=False
-        grounds=[]
-        bricks=[]
-        blocks=[]
-        pipes=[]
-        questions=[]
-        platforms=[]
-        movingplatforms=[]
-        walls=[]
-        castlebricks=[]
-        coins=[]
-        simples=[]
-        complexs=[]
-        shells=[]
-        plants=[]
-        mushrects=[]
-        flowers=[]
-        spikes=[]
-        firebars=[]
-        lavas=[]
-        leveledges=[]
-        x=y=0
-        with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
-            for row in f:
-                for col in row:
-                    if col.upper()=="0":
-                        questions.append(Question(x,y))
-                        questions[-1].item="COIN"
-                    if str(col)in"1234":
-                        pipes.append(Pipe(x,y,col))
-                    if col.upper()=="A":
-                        movingplatforms.append(MovingPlatform(x,y))
-                    if col.upper()=="B":
-                        bricks.append(Block(x,y))
-                    if col.upper()=="C":
-                        coins.append(pygame.Rect(x,y,50,50))
-                    if col.upper()=="D":
-                        complexs.append(Complex(x,y,"RED",True))
-                    if col.upper()=="E":
-                        flagrect=pygame.Rect(x,y-350,50,400)
-                    if col.upper()=="F":
-                        grounds.append(Block(x,y))
-                    if col.upper()=="G":
-                        complexs.append(Complex(x,y,"GREEN",False))
-                    if col.upper()=="H":
-                        complexs.append(Complex(x,y,"GREEN",True))
-                    if col.upper()=="I":
-                        castlebricks.append(Block(x,y))
-                    if col.upper()=="J":
-                        platforms.append(Block(x,y))
-                    if col.upper()=="K":
-                        firebars.append(FireBar(x,y,"c"))
-                    if col.upper()=="L":
-                        blocks.append(Block(x,y))
-                    if col.upper()=="M":
-                        questions.append(Question(x,y))
-                        questions[-1].item="MUSH"
-                    if col.upper()=="N":
-                        firebars.append(FireBar(x,y,"a"))
-                    if col.upper()=="O":
-                        bowser=Bowser(x,y)
-                    if col.upper()=="P":
-                        plants.append(Plant(x,y))
-                    if col.upper()=="Q":
-                        questions.append(Question(x,y))
-                    if col.upper()=="R":
-                        complexs.append(Complex(x,y,"RED",False))
-                    if col.upper()=="S":
-                        simples.append(Simple(x,y))
-                    if col.upper()=="U":
-                        questions.append(Question(x,y))
-                        questions[-1].item="UPGRADE"
-                    if col.upper()=="V":
-                        lavas.append(Lava(x,y))
-                    if col.upper()=="W":
-                        walls.append(Block(x,y))
-                    if col.upper()=="X":
-                        spikes.append(Block(x,y))
-                    if col.upper()=="Z":
-                        leveledges.append(x)
-                    x+=50
-                y+=50
-                x=0
-            f.close()
-        player.rect.y=450
-        player.rect.x=0
+        try:
+            if level==5:
+                level=1
+                area+=1
+                if area==9:
+                    r=False
+            grounds=[]
+            bricks=[]
+            blocks=[]
+            pipes=[]
+            questions=[]
+            platforms=[]
+            movingplatforms=[]
+            walls=[]
+            castlebricks=[]
+            coins=[]
+            simples=[]
+            complexs=[]
+            shells=[]
+            plants=[]
+            mushrects=[]
+            flowers=[]
+            spikes=[]
+            firebars=[]
+            lavas=[]
+            leveledges=[]
+            x=y=0
+            with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
+                for row in f:
+                    for col in row:
+                        if col.upper()=="0":
+                            questions.append(Question(x,y))
+                            questions[-1].item="COIN"
+                        if str(col)in"1234":
+                            pipes.append(Pipe(x,y,col))
+                        if col.upper()=="A":
+                            movingplatforms.append(MovingPlatform(x,y))
+                        if col.upper()=="B":
+                            bricks.append(Block(x,y))
+                        if col.upper()=="C":
+                            coins.append(pygame.Rect(x,y,50,50))
+                        if col.upper()=="D":
+                            complexs.append(Complex(x,y,"RED",True))
+                        if col.upper()=="E":
+                            flagrect=pygame.Rect(x,y-350,50,400)
+                            try:
+                                del axerect
+                            except:
+                                pass
+                        if col.upper()=="F":
+                            grounds.append(Block(x,y))
+                        if col.upper()=="G":
+                            complexs.append(Complex(x,y,"GREEN",False))
+                        if col.upper()=="H":
+                            complexs.append(Complex(x,y,"GREEN",True))
+                        if col.upper()=="I":
+                            castlebricks.append(Block(x,y))
+                        if col.upper()=="J":
+                            platforms.append(Block(x,y))
+                        if col.upper()=="K":
+                            firebars.append(FireBar(x,y,"c"))
+                        if col.upper()=="L":
+                            blocks.append(Block(x,y))
+                        if col.upper()=="M":
+                            questions.append(Question(x,y))
+                            questions[-1].item="MUSH"
+                        if col.upper()=="N":
+                            firebars.append(FireBar(x,y,"a"))
+                        if col.upper()=="O":
+                            bowser=Bowser(x,y)
+                        if col.upper()=="P":
+                            plants.append(Plant(x,y))
+                        if col.upper()=="Q":
+                            questions.append(Question(x,y))
+                        if col.upper()=="R":
+                            complexs.append(Complex(x,y,"RED",False))
+                        if col.upper()=="S":
+                            simples.append(Simple(x,y))
+                        if col.upper()=="T":
+                            axerect=pygame.Rect(x,y,50,50)
+                            try:
+                                del flagrect
+                            except:
+                                pass
+                        if col.upper()=="U":
+                            questions.append(Question(x,y))
+                            questions[-1].item="UPGRADE"
+                        if col.upper()=="V":
+                            lavas.append(Lava(x,y))
+                        if col.upper()=="W":
+                            walls.append(Block(x,y))
+                        if col.upper()=="X":
+                            spikes.append(Block(x,y))
+                        if col.upper()=="Y":
+                            pass
+                        if col.upper()=="Z":
+                            leveledges.append(x)
+                        x+=50
+                    y+=50
+                    x=0
+                f.close()
+            player.rect.y=450
+            player.rect.x=0
+        except:
+            r=False
     #Code to be improved :)/\
     if user_input[pygame.K_ESCAPE]:
         r=False
@@ -1292,8 +1332,11 @@ while r:
             comple.move(comple.speed)
             comple.move(dy=10)
             screen.blit(comple.image,(comple.rect.x,comple.rect.y))
-            if comple.wings:
+            if comple.wings and comple.direction=="l":
                 screen.blit(comple.wingimage,(comple.rect.x+30,comple.rect.y))
+            elif comple.wings:
+                
+                screen.blit(comple.wingimage,(comple.rect.x+5,comple.rect.y))
     for shell in shells:
         if shell.rect.y>=0 and shell.rect.y<=900 and shell.rect.x>=-50 and shell.rect.x<=1600:
             if shell.hit and time.time()-shell.time:
@@ -1401,8 +1444,12 @@ while r:
         if lava.rect.y>=0 and lava.rect.y<=900 and lava.rect.x>=-50 and lava.rect.x<=1600:
             screen.blit(lavaimg,(lava.rect.x,lava.rect.y))
             pygame.draw.rect(screen,(88,88,88),pygame.Rect(lava.rect.x,lava.rect.y+10,50,890))
-    if flagrect.x>=-50 and flagrect.x<=1600 and flagrect.y>=0 and flagrect.y<=900:
-        screen.blit(flagimg,(flagrect.x,flagrect.y))
+    try:
+        if flagrect.x>=-50 and flagrect.x<=1600 and flagrect.y>=0 and flagrect.y<=900:
+            screen.blit(flagimg,(flagrect.x,flagrect.y))
+    except:
+        if axerect.x>=-50 and axerect.x<=1600 and axerect.y>=0 and axerect.y<=900:
+            screen.blit(axeimg,(axerect.x,axerect.y))
     screen.blit(myfont.render("Lives: "+str(player.lives),0,(0,0,0)),(1500,0))
     screen.blit(myfont.render("Score: "+"0"*(10-len(str(player.score)))+str(player.score),0,(0,0,0)),(1250,0))
     if user_input[pygame.K_0]:
