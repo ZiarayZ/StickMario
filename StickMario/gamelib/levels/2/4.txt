@@ -4,18 +4,16 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-E
+IIIIIIIIIIIIIIII                  IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII         IIIIII                IIIIIIIIIIIIIIIIIIIIIIIIIIIII
+IIIIIIIIIIIIIIII       U          I                                               I         IIIIII                IIIIIIIIIIIII              II
+IIIIIIIIIIIIIIII                  I      G                  R                     I   A     IIIIII                IIIIIIIIIIIII              II
+                                  IIIIIIIIIIIIIIIIIIIIINIIIIIIIIIIIIIIIIIIIIIIIIIII                                            BBBBBBBB      II
+                5             5                                                   N                                                            
+III                   IKI                                                                                                                      
+IIII                                                                                                 CCC                                O      
+IIIII             II       II        IIIIIIIIIIIINIIIIIIIIIIINIIIIIIIIIIIK                                                                  T  
+IIIIIIIIIIIIIIII                II                                              IIII       KIIIIII         I  II  IIIII  II  IILLLLLLLLLLLLLIII
+I              I                II                                              I  I  A    I     I    K    I  II  I   I  II  II             III
+I              I                II                                              IS I       I R R I   CCC   I  II  I S I  II  II             III
+IIIIIIIIIIIIIIIIVVVVVVVVVVVVVVVVIIIIIIIIIIIKIIIIIIIIIIIKIIIIIIIIIIIKIIIIIIIIIIIIIIII       IIIIIIIIIIIIIIIIIVVIIVVIIIIIIIIIIIIIVVVVVVVVVVVVVIII
+Z                                                                                                                                             Z
