@@ -1204,7 +1204,7 @@ clock=pygame.time.Clock()
 pygame.mouse.set_visible(False)
 player=Player(0,750)
 #Code to be improved :)\/
-area=1
+area=3
 level=1
 BOWSERhealth=7
 charactertime=0
@@ -1495,9 +1495,13 @@ while r:
     if (user_input[pygame.K_a]or user_input[pygame.K_LEFT])and not player.runningleft:
         player.runningleft=True
         player.rg=5
+        if player.lavacollision:
+            player.rg=4
     elif (user_input[pygame.K_a]or user_input[pygame.K_LEFT])and player.runningleft:
         player.move(-player.rg)
-        if player.rg<8:
+        if player.rg<8 and not player.lavacollision:
+            player.rg+=0.1
+        if player.rg<6 and not player.lavacollision:
             player.rg+=0.1
         player.animation("l")
     else:
@@ -1505,9 +1509,13 @@ while r:
     if (user_input[pygame.K_d]or user_input[pygame.K_RIGHT])and not player.runningright:
         player.runningright=True
         player.rg=5
+        if player.lavacollision:
+            player.rg=4
     elif (user_input[pygame.K_d]or user_input[pygame.K_RIGHT])and player.runningright:
         player.move(player.rg)
-        if player.rg<8:
+        if player.rg<8 and not player.lavacollision:
+            player.rg+=0.1
+        if player.rg<6 and not player.lavacollision:
             player.rg+=0.1
         player.animation("r")
     else:
