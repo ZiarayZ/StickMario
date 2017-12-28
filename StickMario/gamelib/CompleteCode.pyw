@@ -1005,7 +1005,7 @@ def everything(direction,otherdirection=0):
     direction=int(direction)
     otherdirection=int(otherdirection)
     if direction!=0:
-        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,plants,platforms,walls,movingplatforms,lavas,castlebricks,bloopers,podoboos]:
+        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,plants,platforms,walls,movingplatforms,lavas,castlebricks,bloopers,podoboos,beetles]:
             for item in items:
                 item.rect.x+=direction
         for items in [coins,mushrects,flowers]:
@@ -1035,7 +1035,7 @@ def everything(direction,otherdirection=0):
         except:
             pass
     if otherdirection!=0:
-        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,platforms,walls,movingplatforms,lavas,castlebricks,bloopers,podoboos]:
+        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,platforms,walls,movingplatforms,lavas,castlebricks,bloopers,podoboos,beetles]:
             for item in items:
                 item.rect.y+=otherdirection
         for items in [coins,mushrects,flowers]:
@@ -1204,7 +1204,7 @@ clock=pygame.time.Clock()
 pygame.mouse.set_visible(False)
 player=Player(0,750)
 #Code to be improved :)\/
-area=3
+area=1
 level=1
 BOWSERhealth=7
 charactertime=0
@@ -1598,6 +1598,10 @@ while r:
     for blooper in bloopers:
         if blooper.rect.y>=0 and blooper.rect.y<=900 and blooper.rect.x>=-50 and blooper.rect.x<=1600:
             screen.blit(blooperimg,(blooper.rect.x,blooper.rect.y))
+    for beetle in beetles:
+        if beetle.rect.y>=0 and beetle.rect.y<=900 and beetle.rect.x>=-50 and beetle.rect.x<=1600:
+            beetle.move()
+            screen.blit(beetle.image,(beetle.rect.x,beetle.rect.y))
     for brother in brothers:
         brother.attack()
         for hammer in brother.hammers:
