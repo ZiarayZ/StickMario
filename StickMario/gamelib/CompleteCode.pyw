@@ -124,7 +124,7 @@ class Player(object):
                         self.g=0
         for movingplatform in movingplatforms:
             if movingplatform.rect.colliderect(self.rect)and dy>0:
-                if (movingplatform.rect.y>self.rect.y+75 and self.health>1)or(movingplatform.rect.y>self.rect.y+25 and self.health==1):
+                if (movingplatform.rect.y>self.rect.y+65 and self.health>1)or(movingplatform.rect.y>self.rect.y+15 and self.health==1):
                         self.rect.bottom=movingplatform.rect.top
                         self.g=0
                         self.jumping=False
@@ -477,7 +477,7 @@ class MovingPlatform(object):
             if self.rect.y>=900:
                 self.rect.y=-24
             if self.rect.colliderect(player.rect):
-                if (self.rect.y>player.rect.y+75 and player.health>1)or(self.rect.y>player.rect.y+25 and player.health==1):
+                if (self.rect.y>player.rect.y+65 and player.health>1)or(self.rect.y>player.rect.y+15 and player.health==1):
                         player.rect.bottom=self.rect.top
 class Simple(object):
     def __init__(self,wx,wy):
@@ -970,23 +970,58 @@ class Beetle(object):
                     self.rect.bottom=item.rect.top
     def animation(self,direction):
         self.direction=direction
-        if time.time()-self.animtime>0.3:
-            self.animtime=time.time()
-        elif time.time()-self.animtime>0.2:
-            if direction=="r":
-                self.image=sb3r
+        if self.type=="SPINY":
+            if time.time()-self.animtime>0.3:
+                self.animtime=time.time()
+            elif time.time()-self.animtime>0.2:
+                if direction=="r":
+                    self.image=sb3r
+                else:
+                    self.image=sb3l
+            elif time.time()-self.animtime>0.1:
+                if direction=="r":
+                    self.image=sb2r
+                else:
+                    self.image=sb2l
             else:
-                self.image=sb3l
-        elif time.time()-self.animtime>0.1:
-            if direction=="r":
-                self.image=sb2r
-            else:
-                self.image=sb2l
+                if direction=="r":
+                    self.image=sb1r
+                else:
+                    self.image=sb1l
         else:
-            if direction=="r":
-                self.image=sb1r
+            if time.time()-self.animtime>0.3:
+                self.animtime=time.time()
+            elif time.time()-self.animtime>0.2:
+                if direction=="r":
+                    self.image=bb3r
+                else:
+                    self.image=bb3l
+            elif time.time()-self.animtime>0.1:
+                if direction=="r":
+                    self.image=bb2r
+                else:
+                    self.image=bb2l
             else:
-                self.image=sb1l
+                if direction=="r":
+                    self.image=bb1r
+                else:
+                    self.image=bb1l
+class Lakitu(object):
+    def __init__(self,wx,wy):
+        self.rect=pygame.Rect(wx,wy-25,50,75)
+        self.speed=0
+        self.image=ll
+    def move(self):
+        if self.rect.x-player.rect.x>0:
+            self.speed-=1
+        if player.rect.x-self.rect.x>0:
+            self.speed+=1
+        if self.speed>0:
+            self.rect.x+=self.speed
+            self.image=lr
+        if self.speed<0:
+            self.rect.x+=self.speed
+            self.image=ll
 class Bowser(object):
     def __init__(self,wx,wy,health):
         self.rect=pygame.Rect(wx,wy,100,100)
@@ -1005,7 +1040,7 @@ def everything(direction,otherdirection=0):
     direction=int(direction)
     otherdirection=int(otherdirection)
     if direction!=0:
-        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,plants,platforms,walls,movingplatforms,lavas,castlebricks,bloopers,podoboos,beetles]:
+        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,plants,platforms,walls,movingplatforms,lavas,castlebricks,bloopers,podoboos,beetles,lakitus]:
             for item in items:
                 item.rect.x+=direction
         for items in [coins,mushrects,flowers]:
@@ -1035,7 +1070,7 @@ def everything(direction,otherdirection=0):
         except:
             pass
     if otherdirection!=0:
-        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,platforms,walls,movingplatforms,lavas,castlebricks,bloopers,podoboos,beetles]:
+        for items in [grounds,bricks,blocks,simples,complexs,shells,spikes,questions,pipes,platforms,walls,movingplatforms,lavas,castlebricks,bloopers,podoboos,beetles,lakitus]:
             for item in items:
                 item.rect.y+=otherdirection
         for items in [coins,mushrects,flowers]:
@@ -1081,6 +1116,7 @@ bloopers=[]
 podoboos=[]
 brothers=[]
 beetles=[]
+lakitus=[]
 mushrects=[]
 flowers=[]
 spikes=[]
@@ -1195,10 +1231,18 @@ blooperimg=pygame.image.load(folder+"sprites/enemies/blooper.png")
 podobooimg=pygame.image.load(folder+"sprites/enemies/podoboo.png")
 sb1l=pygame.image.load(folder+"sprites/enemies/beetle/spiny/left/1.png")
 sb2l=pygame.image.load(folder+"sprites/enemies/beetle/spiny/left/2.png")
-sb3l=pygame.image.load(folder+"sprites/enemies/beetle/spiny/left/2.png")
+sb3l=pygame.image.load(folder+"sprites/enemies/beetle/spiny/left/3.png")
 sb1r=pygame.image.load(folder+"sprites/enemies/beetle/spiny/right/1.png")
 sb2r=pygame.image.load(folder+"sprites/enemies/beetle/spiny/right/2.png")
 sb3r=pygame.image.load(folder+"sprites/enemies/beetle/spiny/right/3.png")
+bb1l=pygame.image.load(folder+"sprites/enemies/beetle/buzzy/left/1.png")
+bb2l=pygame.image.load(folder+"sprites/enemies/beetle/buzzy/left/2.png")
+bb3l=pygame.image.load(folder+"sprites/enemies/beetle/buzzy/left/3.png")
+bb1r=pygame.image.load(folder+"sprites/enemies/beetle/buzzy/right/1.png")
+bb2r=pygame.image.load(folder+"sprites/enemies/beetle/buzzy/right/2.png")
+bb3r=pygame.image.load(folder+"sprites/enemies/beetle/buzzy/right/3.png")
+lr=pygame.image.load(folder+"sprites/enemies/lakitu/right.png")
+ll=pygame.image.load(folder+"sprites/enemies/lakitu/left.png")
 screen=pygame.display.set_mode((width,height),pygame.FULLSCREEN)
 clock=pygame.time.Clock()
 pygame.mouse.set_visible(False)
@@ -1228,6 +1272,8 @@ with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
                 beetles.append(Beetle(x,y,"SPINY"))
             if str(col)=="8":
                 beetles.append(Beetle(x,y,"BUZZY"))
+            if str(col)=="9":
+                lakitus.append(Lakitu(x,y))
             if col.upper()=="A":
                 movingplatforms.append(MovingPlatform(x,y))
             if col.upper()=="B":
@@ -1372,6 +1418,8 @@ while r:
             bloopers=[]
             podoboos=[]
             brothers=[]
+            beetles=[]
+            lakitus=[]
             mushrects=[]
             flowers=[]
             spikes=[]
@@ -1391,6 +1439,12 @@ while r:
                             podoboos.append(Podoboo(x,y))
                         if str(col)=="6":
                             brothers.append(Brother(x,y))
+                        if str(col)=="7":
+                            beetles.append(Beetle(x,y,"SPINY"))
+                        if str(col)=="8":
+                            beetles.append(Beetle(x,y,"BUZZY"))
+                        if str(col)=="9":
+                            lakitus.append(Lakitu(x,y))
                         if col.upper()=="A":
                             movingplatforms.append(MovingPlatform(x,y))
                         if col.upper()=="B":
