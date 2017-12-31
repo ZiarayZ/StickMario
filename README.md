@@ -16,4 +16,4 @@ NUMPAD 4        - To Add A Life <br />
 NUMPAD 5        - To Set Godmode
 
 #### EDIT
-Bloopers do not have any movement code, Currently Made levels 4-2 and up to 3-4.
+Bloopers do not have any movement code, bullet bill and cannon not implemented, Currently Made levels up to 5-2.
