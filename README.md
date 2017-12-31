@@ -15,4 +15,4 @@ NUMPAD 3        - To Set To Fire <br />
 NUMPAD 9        - To Set Godmode
 
 #### EDIT
-Bloopers do not have any movement code, buzzy beetles aren't fully implemented or drawn, Lakitu has no code.
+Bloopers do not have any movement code, Lakitu has little code.
