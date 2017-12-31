@@ -2,7 +2,7 @@
 Stickman version of Mario. Uses Python and PyGame.
 If you don't have Python and/or PyGame it can still be ran through the start.bat file.
 If you do have Python and PyGame then you can run the python file "CompleteCode.pyw" with the python interpreter.
-Less finicky when editing the program. Currently Made 4-2 and up to 3-4.
+Less finicky when editing the program.
 
 ## CONTROLS
 WASD/Arrow Keys - To Move Around And Enter Pipes <br />
@@ -15,4 +15,4 @@ NUMPAD 3        - To Set To Fire <br />
 NUMPAD 9        - To Set Godmode
 
 #### EDIT
-Bloopers do not have any movement code, Lakitu has little code.
+Bloopers do not have any movement code, Currently Made levels 4-2 and up to 3-4.
