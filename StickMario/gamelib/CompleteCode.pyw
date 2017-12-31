@@ -442,7 +442,12 @@ class FireBall(object):
                 except:
                     pass
                 complexs.remove(comple)
-        for items in [simples,plants]:
+        for beetle in beetles:
+            if beetle.type!="SPINY":
+                if beetle.rect.colliderect(self.rect):
+                    beetles.remove(beetle)
+                    player.fireballs.remove(self)
+        for items in [simples,plants,lakitus,bloopers,brothers]:
             for item in items:
                 if item.rect.colliderect(self.rect):
                     try:
@@ -928,6 +933,10 @@ class Beetle(object):
         self.speed=-2
         self.animtime=0
         self.direction="l"
+        if self.type=="SPINY":
+            self.image=sb1l
+        else:
+            self.image=bb1l
     def move(self):
         self.rect.x+=self.speed
         for items in [grounds,bricks,blocks,questions,pipes,platforms,castlebricks,firebars]:
@@ -941,9 +950,9 @@ class Beetle(object):
         for comple in complexs:
             if comple.rect.colliderect(self.rect):
                 self.speed=-self.speed
-        if dx>0:
+        if self.speed>0:
             self.animation("r")
-        if dx<0:
+        if self.speed<0:
             self.animation("l")
         self.rect.y+=10
         self.rect.x+=self.speed*25
@@ -1011,6 +1020,7 @@ class Lakitu(object):
         self.rect=pygame.Rect(wx,wy-25,50,75)
         self.speed=0
         self.image=ll
+        self.time=0
     def move(self):
         if self.rect.x-player.rect.x>0:
             self.speed-=1
@@ -1022,6 +1032,9 @@ class Lakitu(object):
         if self.speed<0:
             self.rect.x+=self.speed
             self.image=ll
+        if time.time()-self.time>5:
+            beetles.append(Beetle(self.rect.x,self.rect.y+25,"SPINY"))
+            self.time=time.time()
 class Bowser(object):
     def __init__(self,wx,wy,health):
         self.rect=pygame.Rect(wx,wy,100,100)
@@ -1254,6 +1267,7 @@ BOWSERhealth=7
 charactertime=0
 volume=0
 breaktime=0
+lifetime=0
 breakpressed=False
 x=y=0
 with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
@@ -1732,6 +1746,13 @@ while r:
         else:
             plant.rect.y=plant.location
             plant.time=0
+    for lakitu in lakitus:
+        lakitu.move()
+        if lakitu.rect.y>=0 and lakitu.rect.y<=900 and lakitu.rect.x>=-50 and lakitu.rect.x<=1600:
+            if player.rect.colliderect(lakitu.rect)and time.time()-player.hptime>2:
+                player.col_enem()
+                player.hptime=time.time()
+            screen.blit(lakitu.image,(lakitu.rect.x,lakitu.rect.y))
     for ground in grounds:
         if ground.rect.y>=0 and ground.rect.y<=900 and ground.rect.x>=-50 and ground.rect.x<=1600:
             screen.blit(groundimg,(ground.rect.x,ground.rect.y))
@@ -1814,7 +1835,10 @@ while r:
         if player.health<2:
             player.rect=pygame.Rect(player.rect.x,player.rect.y-50,50,100)
         player.health=3
-    if user_input[pygame.K_KP9]and time.time()-breaktime>1:
+    if user_input[pygame.K_KP4]and time.time()-lifetime>0.1:
+        player.lives+=1
+        lifetime=time.time()
+    if user_input[pygame.K_KP5]and time.time()-breaktime>1:
         if breakpressed:
             breakpressed=False
         else:
