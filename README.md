@@ -6,7 +6,7 @@ Less finicky when editing the program. Feel Free to change things, it is terribl
 
 ## CONTROLS
 WASD/Arrow Keys - To Move Around And Enter Pipes <br />
-SPACE           - To Fire Fireballs <br />
+SPACE           - To Fire Fireballs (If Fire StickMario) <br />
 ENTER           - To Change Name Above Character's Head (Currently only accepts the alphabet hold SHIFT for capitals)
 ### CHEATS
 NUMPAD 1        - To Set To Small <br />
