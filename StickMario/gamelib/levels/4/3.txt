@@ -1,0 +1,19 @@
+
+
+
+
+
+
+                                           U                          CCC
+                                    D                                 JJJ
+                    CCC         JJJ                                    W  R
+                   JJJJJ         W     JJJJJ                           W  JJJJJ
+                     W           W       W                         CCC W    W                                        JJJ
+                     W           W       W      C                  JJJ W    W                   C                     W
+                     W RCCCCCR   W       W         JJJ    A         W  W C  W                                    CCCCCW
+                     W JJJJJJJ   W       W  JJJ     W               W  WJJJ W       JJJ    A                     JJJJJW
+                     W    W      W       W   W      W               W  W W  W        W                   JJJ       W  W           JJJJJ A    
+                     W    W      W   RCCCW   W      W               W  W W  W        W             JJJ    W        W  W             W              E
+                     W    W      W  JJJJJJJ  W      W               WR W W  W        W              W     W        W  W             W              L
+FFFFFFFFFFFFFFF JJJJJW    W      W     W W   W      W            JJJJJ W W  W        W              W     W        W  W  JJJJJJJ    W        FFFFFFF
+Z                                                                                                                                                  Z
