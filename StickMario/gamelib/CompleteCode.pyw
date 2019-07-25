@@ -1143,16 +1143,16 @@ os.environ["SDL_VIDEO_WINDOW_POS"]="0,0"
 pygame.init()
 myfont=pygame.font.SysFont("Arial",30)
 player_label=myfont.render(name,0,(0,0,155))
-music=pygame.mixer.Sound(folder+"sound/music.wav")
-pygame.mixer.set_num_channels(8)
-channel0=pygame.mixer.Channel(0)
-channel1=pygame.mixer.Channel(1)
-channel2=pygame.mixer.Channel(2)
-channel3=pygame.mixer.Channel(3)
-channel4=pygame.mixer.Channel(4)
-channel5=pygame.mixer.Channel(5)
-channel6=pygame.mixer.Channel(6)
-channel7=pygame.mixer.Channel(7)
+#music=pygame.mixer.Sound(folder+"sound/music.wav")
+#pygame.mixer.set_num_channels(8)
+#channel0=pygame.mixer.Channel(0)
+#channel1=pygame.mixer.Channel(1)
+#channel2=pygame.mixer.Channel(2)
+#channel3=pygame.mixer.Channel(3)
+#channel4=pygame.mixer.Channel(4)
+#channel5=pygame.mixer.Channel(5)
+#channel6=pygame.mixer.Channel(6)
+#channel7=pygame.mixer.Channel(7)
 empty=pygame.image.load(folder+"sprites/empty.png")
 p1s=pygame.image.load(folder+"sprites/player/1/s.png")
 p2s=pygame.image.load(folder+"sprites/player/2/s.png")
@@ -1362,9 +1362,9 @@ while r:
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             r=False
-    channel0.set_volume(volume)
-    if not channel0.get_busy():
-        channel0.play(music)
+    #channel0.set_volume(volume)
+    #if not channel0.get_busy():
+    #    channel0.play(music)
     screen.fill((255,255,255))
     for lava in lavas:
         if lava.rect.y>=-50 and lava.rect.y<=900 and lava.rect.x>=-50 and lava.rect.x<=1600:
