@@ -1111,6 +1111,7 @@ def everything(direction,otherdirection=0):
         except:
             axerect.y+=otherdirection
         player.rect.y+=otherdirection
+#create lists of entities
 grounds=[]
 bricks=[]
 blocks=[]
@@ -1143,6 +1144,7 @@ os.environ["SDL_VIDEO_WINDOW_POS"]="0,0"
 pygame.init()
 myfont=pygame.font.SysFont("Arial",30)
 player_label=myfont.render(name,0,(0,0,155))
+#all sound variables defined
 music=pygame.mixer.Sound(folder+"sound/music.wav")
 pygame.mixer.set_num_channels(8)
 channel0=pygame.mixer.Channel(0)
@@ -1153,7 +1155,9 @@ channel4=pygame.mixer.Channel(4)
 channel5=pygame.mixer.Channel(5)
 channel6=pygame.mixer.Channel(6)
 channel7=pygame.mixer.Channel(7)
+#all images pulled for displaying
 empty=pygame.image.load(folder+"sprites/empty.png")
+#player animations
 p1s=pygame.image.load(folder+"sprites/player/1/s.png")
 p2s=pygame.image.load(folder+"sprites/player/2/s.png")
 p3s=pygame.image.load(folder+"sprites/player/3/s.png")
@@ -1187,12 +1191,14 @@ p32l=pygame.image.load(folder+"sprites/player/3/left/2.png")
 p33l=pygame.image.load(folder+"sprites/player/3/left/3.png")
 p34l=pygame.image.load(folder+"sprites/player/3/left/4.png")
 p35l=pygame.image.load(folder+"sprites/player/3/left/5.png")
+#goomba animations
 s1r=pygame.image.load(folder+"sprites/enemies/simple/right/1.png")
 s2r=pygame.image.load(folder+"sprites/enemies/simple/right/2.png")
 s3r=pygame.image.load(folder+"sprites/enemies/simple/right/3.png")
 s1l=pygame.image.load(folder+"sprites/enemies/simple/left/1.png")
 s2l=pygame.image.load(folder+"sprites/enemies/simple/left/2.png")
 s3l=pygame.image.load(folder+"sprites/enemies/simple/left/3.png")
+#koopa animations
 cg1r=pygame.image.load(folder+"sprites/enemies/shell/green/right/1.png")
 cg2r=pygame.image.load(folder+"sprites/enemies/shell/green/right/2.png")
 cg3r=pygame.image.load(folder+"sprites/enemies/shell/green/right/3.png")
@@ -1213,16 +1219,21 @@ cr2l=pygame.image.load(folder+"sprites/enemies/shell/red/left/2.png")
 cr3l=pygame.image.load(folder+"sprites/enemies/shell/red/left/3.png")
 cr4l=pygame.image.load(folder+"sprites/enemies/shell/red/left/4.png")
 cr5l=pygame.image.load(folder+"sprites/enemies/shell/red/left/5.png")
+#koopa shell
 wr=pygame.image.load(folder+"sprites/enemies/shell/right.png")
 wl=pygame.image.load(folder+"sprites/enemies/shell/left.png")
-fc=pygame.image.load(folder+"sprites/enemies/plant/closed.png")
-fo=pygame.image.load(folder+"sprites/enemies/plant/open.png")
-p1=pygame.image.load(folder+"sprites/pipe/1.png")
-p2=pygame.image.load(folder+"sprites/pipe/2.png")
 shellgimg=pygame.image.load(folder+"sprites/enemies/shell/green/shell.png")
 shellrimg=pygame.image.load(folder+"sprites/enemies/shell/red/shell.png")
+#plant
+fc=pygame.image.load(folder+"sprites/enemies/plant/closed.png")
+fo=pygame.image.load(folder+"sprites/enemies/plant/open.png")
+#pipes
+p1=pygame.image.load(folder+"sprites/pipe/1.png")
+p2=pygame.image.load(folder+"sprites/pipe/2.png")
+#powerups
 mushimg=pygame.image.load(folder+"sprites/mush.png")
 flowerimg=pygame.image.load(folder+"sprites/flower.png")
+#blocks
 groundimg=pygame.image.load(folder+"sprites/blocks/ground.png")
 brickimg=pygame.image.load(folder+"sprites/blocks/brick.png")
 blockimg=pygame.image.load(folder+"sprites/blocks/block.png")
@@ -1233,15 +1244,22 @@ wallimg=pygame.image.load(folder+"sprites/blocks/wall.png")
 movingplatformimg=pygame.image.load(folder+"sprites/blocks/movingplatform.png")
 coinimg=pygame.image.load(folder+"sprites/coin.png")
 spikeimg=pygame.image.load(folder+"sprites/spike.png")
+#flag
 flagimg=pygame.image.load(folder+"sprites/flag.png")
+#water/lava and fireball
 fireballimg=pygame.image.load(folder+"sprites/player/fireball.png")
 lavaimg=pygame.image.load(folder+"sprites/lava.png")
+#more blocks
 castlebrickimg=pygame.image.load(folder+"sprites/blocks/castle.png")
+#bowser boss
 bowserimg=pygame.image.load(folder+"sprites/enemies/bowser/sprite.png")
 fireimg=pygame.image.load(folder+"sprites/enemies/bowser/fire.png")
+#axe
 axeimg=pygame.image.load(folder+"sprites/axe.png")
+#blooper and podoboo
 blooperimg=pygame.image.load(folder+"sprites/enemies/blooper.png")
 podobooimg=pygame.image.load(folder+"sprites/enemies/podoboo.png")
+#2 different beetles, spiny and buzzy
 sb1l=pygame.image.load(folder+"sprites/enemies/beetle/spiny/left/1.png")
 sb2l=pygame.image.load(folder+"sprites/enemies/beetle/spiny/left/2.png")
 sb3l=pygame.image.load(folder+"sprites/enemies/beetle/spiny/left/3.png")
@@ -1254,13 +1272,17 @@ bb3l=pygame.image.load(folder+"sprites/enemies/beetle/buzzy/left/3.png")
 bb1r=pygame.image.load(folder+"sprites/enemies/beetle/buzzy/right/1.png")
 bb2r=pygame.image.load(folder+"sprites/enemies/beetle/buzzy/right/2.png")
 bb3r=pygame.image.load(folder+"sprites/enemies/beetle/buzzy/right/3.png")
+#lakitu
 lr=pygame.image.load(folder+"sprites/enemies/lakitu/right.png")
 ll=pygame.image.load(folder+"sprites/enemies/lakitu/left.png")
+#define window things
 screen=pygame.display.set_mode((width,height),pygame.FULLSCREEN)
 clock=pygame.time.Clock()
 pygame.mouse.set_visible(False)
+#create player
 player=Player(0,750)
 #Code to be improved :)\/
+#variables that change by level
 area=1
 level=1
 BOWSERhealth=7
@@ -1269,6 +1291,7 @@ volume=0
 breaktime=0
 lifetime=0
 breakpressed=False
+#generating the first level
 x=y=0
 with open(folder+"levels/"+str(area)+"/"+str(level)+".txt","r")as f:
     for row in f:
@@ -1362,21 +1385,26 @@ while r:
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             r=False
+    #plays reversed mario music on channel0 whilst making sure volume is set correctly each frame
     channel0.set_volume(volume)
     if not channel0.get_busy():
         channel0.play(music)
     screen.fill((255,255,255))
+    #lava/water displays behind blocks and entities, this also makes them have less than one frame delayed movement, looks slightly more fluid
     for lava in lavas:
         if lava.rect.y>=-50 and lava.rect.y<=900 and lava.rect.x>=-50 and lava.rect.x<=1600:
             screen.blit(lavaimg,(lava.rect.x,lava.rect.y))
             pygame.draw.rect(screen,(88,88,88),pygame.Rect(lava.rect.x,lava.rect.y+10,50,940))
+    #all user input on keyboard
     user_input=pygame.key.get_pressed()
     levelChange=False
+    #moving platform checks
     for movingplatform in movingplatforms:
         if movingplatform.rect.x>=-150 and movingplatform.rect.x<=1600:
             movingplatform.move(dy=-7)
             if movingplatform.rect.y>=0 and movingplatform.rect.y<=900:
                 screen.blit(movingplatformimg,(movingplatform.rect.x,movingplatform.rect.y))
+    #level end check (axe or flag)
     try:
         if player.rect.colliderect(flagrect):
             player.score+=5000
@@ -1391,21 +1419,25 @@ while r:
                 del bowser
             except:
                 pass
+    #player falls
     if player.rect.y>=900:
         player.lives-=1
         levelChange=True
         if player.health>1:
             player.rect=pygame.Rect(player.rect.x,player.rect.y+50,50,50)
         player.health=1
+    #player reset
     if player.died:
         player.died=False
         levelChange=True
         if player.health>1:
             player.rect=pygame.Rect(player.rect.x,player.rect.y+50,50,50)
         player.health=1
+    #player runs out of lives
     if player.lives==-1:
         r=False
     #Code to be improved :)\/
+    #level change code, empties all entity lists and refills them
     if levelChange:
         try:
             if level==5:
@@ -1531,8 +1563,10 @@ while r:
         except:
             r=False
     #Code to be improved :)/\
+    #escape to quit
     if user_input[pygame.K_ESCAPE]:
         r=False
+    #fall in lava collision code, also used as water in water level
     player.lavacollision=False
     for lava in lavas:
         if player.rect.colliderect(lava.rect)and player.rect.y>lava.rect.y+110:
@@ -1541,6 +1575,7 @@ while r:
             if player.g<-2:
                 player.g=-2
             player.lavacollision=True
+    #jump code
     if (user_input[pygame.K_w]or user_input[pygame.K_UP])and(not player.jumping or player.lavacollision)and time.time()-player.swimmingtime>0.3:
         player.jump()
         player.swimmingtime=time.time()
@@ -1556,10 +1591,12 @@ while r:
         if not player.collision:
             player.g=0
             player.jumping=True
+    #water falling
     if player.lavacollision:
         player.move(dy=-player.g)
         if player.g>-2:
             player.g-=1
+    #movement
     if (user_input[pygame.K_a]or user_input[pygame.K_LEFT])and not player.runningleft:
         player.runningleft=True
         player.rg=5
@@ -1588,6 +1625,7 @@ while r:
         player.animation("r")
     else:
         player.runningright=False
+    #move everything in relation to player for displaying
     try:
         if player.rect.x<700 and leveledges[0]<=0:
             everything((700-player.rect.x)/20)
@@ -1598,13 +1636,16 @@ while r:
             everything(-(player.rect.x-900)/20)
     except:
         pass
+    #player collides with edge of screen
     if player.rect.x<0:
         player.rect.x=0
     if player.rect.x>1550:
         player.rect.x=1550
+    #player fireballs (need to remove after level end)
     if user_input[pygame.K_SPACE]and player.health==3 and time.time()-player.firetime>0.5:
         player.fireballs.append(FireBall(player.rect.x+20,player.rect.y,player.direction))
         player.firetime=time.time()
+    #if bowser exists in the level execute this code block
     try:
         bowser.attack()
         if player.rect.colliderect(bowser)and time.time()-player.hptime>2:
@@ -1624,6 +1665,7 @@ while r:
             del bowser
     except:
         pass
+    #player fireballs (need to remove after level end)
     for fireball in player.fireballs:
         if not(fireball.rect.x>=1600 or fireball.rect.x<=-8 or fireball.rect.y>=900 or fireball.rect.y<=-8):
             fireball.move(9)
@@ -1631,6 +1673,7 @@ while r:
             screen.blit(fireballimg,(fireball.rect.x,fireball.rect.y))
         else:
             player.fireballs.remove(fireball)
+    #1up and growth mushrooms (same thing)
     for mushrect in mushrects:
         if mushrect.y>=0 and mushrect.y<=900 and mushrect.x>=-50 and mushrect.x<=1600:
             mushrect.x+=2
@@ -1644,16 +1687,20 @@ while r:
                     if mushrect.colliderect(item.rect):
                         mushrect.bottom=item.rect.top
             screen.blit(mushimg,(mushrect.x,mushrect.y))
+    #fire flower
     for flower in flowers:
         if flower.y>=0 and flower.y<=900 and flower.x>=-50 and flower.x<=1600:
             screen.blit(flowerimg,(flower.x,flower.y))
+    #if player is not moving use stationary animation
     if not (player.runningright or player.runningleft):
         player.stationary()
+    #simples are goombas
     for simple in simples:
         if simple.rect.y>=0 and simple.rect.y<=900 and simple.rect.x>=-50 and simple.rect.x<=1600:
             simple.move(simple.speed)
             simple.move(dy=10)
             screen.blit(simple.image,(simple.rect.x,simple.rect.y))
+    #complexs should be koopas
     for comple in complexs:
         if comple.rect.y>=0 and comple.rect.y<=900 and comple.rect.x>=-50 and comple.rect.x<=1600:
             comple.move(comple.speed)
@@ -1663,13 +1710,16 @@ while r:
                 screen.blit(comple.wingimage,(comple.rect.x+30,comple.rect.y))
             elif comple.wings:
                 screen.blit(comple.wingimage,(comple.rect.x+5,comple.rect.y))
+    #bloopers have no movement code
     for blooper in bloopers:
         if blooper.rect.y>=0 and blooper.rect.y<=900 and blooper.rect.x>=-50 and blooper.rect.x<=1600:
             screen.blit(blooperimg,(blooper.rect.x,blooper.rect.y))
+    #beetles self explanatory
     for beetle in beetles:
         if beetle.rect.y>=0 and beetle.rect.y<=900 and beetle.rect.x>=-50 and beetle.rect.x<=1600:
             beetle.move()
             screen.blit(beetle.image,(beetle.rect.x,beetle.rect.y))
+    #hammer brothers
     for brother in brothers:
         brother.attack()
         for hammer in brother.hammers:
@@ -1681,6 +1731,7 @@ while r:
                 pygame.draw.rect(screen,(0,0,0),pygame.Rect(hammer.rect.x+12,hammer.rect.y+11,13,3))
         if brother.rect.y>=0 and brother.rect.y<=900 and brother.rect.x>=-50 and brother.rect.x<=1600:
             screen.blit(brother.image,(brother.rect.x,brother.rect.y))
+    #koopa shells, currently only collide with blocks, player and goombas/koopas, other entities are immune
     for shell in shells:
         if shell.rect.y>=0 and shell.rect.y<=900 and shell.rect.x>=-50 and shell.rect.x<=1600:
             if shell.hit and time.time()-shell.time:
@@ -1732,10 +1783,12 @@ while r:
             screen.blit(shell.image,(shell.rect.x,shell.rect.y))
         else:
             shells.remove(shell)
+    #fire balls in lava levels
     for podoboo in podoboos:
         if podoboo.rect.y>=0 and podoboo.rect.y<=1800 and podoboo.rect.x>=-50 and podoboo.rect.x<=1600:
             podoboo.move()
             screen.blit(podobooimg,(podoboo.rect.x,podoboo.rect.y))
+    #quite buggy with their speed, there are times when they are in the wrong place due to player pipe travel
     for plant in plants:
         if plant.rect.y>=0 and plant.rect.y<=900 and plant.rect.x>=-50 and plant.rect.x<=1600:
             plant.move()
@@ -1746,6 +1799,7 @@ while r:
         else:
             plant.rect.y=plant.location
             plant.time=0
+    #lakitu hovers on a cloud above the player throwing spiked beetles at them
     for lakitu in lakitus:
         lakitu.move()
         if lakitu.rect.y>=0 and lakitu.rect.y<=900 and lakitu.rect.x>=-50 and lakitu.rect.x<=1600:
@@ -1753,6 +1807,7 @@ while r:
                 player.col_enem()
                 player.hptime=time.time()
             screen.blit(lakitu.image,(lakitu.rect.x,lakitu.rect.y))
+    #all blocks listed below
     for ground in grounds:
         if ground.rect.y>=0 and ground.rect.y<=900 and ground.rect.x>=-50 and ground.rect.x<=1600:
             screen.blit(groundimg,(ground.rect.x,ground.rect.y))
@@ -1792,7 +1847,9 @@ while r:
             firebar.move()
             for fireball in firebar.fireballs:
                 screen.blit(fireballimg,(fireball.x,fireball.y))
+    #display player name
     screen.blit(player_label,(player.rect.x-player_label_width+25,player.rect.y-50))
+    #flashing player when immune
     if(time.time()-player.hptime>2)or(time.time()-player.hptime>1.8 and time.time()-player.hptime<1.9)or(time.time()-player.hptime>1.6 and time.time()-player.hptime<1.7)or(time.time()-player.hptime>1.4 and time.time()-player.hptime<1.5)or(time.time()-player.hptime>1.2 and time.time()-player.hptime<1.3)or(time.time()-player.hptime>1.0 and time.time()-player.hptime<1.1)or(time.time()-player.hptime>0.8 and time.time()-player.hptime<0.9)or(time.time()-player.hptime>0.6 and time.time()-player.hptime<0.7)or(time.time()-player.hptime>0.4 and time.time()-player.hptime<0.5)or(time.time()-player.hptime>0.2 and time.time()-player.hptime<0.3)or(time.time()-player.hptime>0.0 and time.time()-player.hptime<0.1):
         screen.blit(player.image,(player.rect.x-5,player.rect.y))
     try:
@@ -1803,6 +1860,7 @@ while r:
             screen.blit(axeimg,(axerect.x,axerect.y))
     screen.blit(myfont.render("Lives: "+str(player.lives),0,(0,0,0)),(1500,0))
     screen.blit(myfont.render("Score: "+"0"*(10-len(str(player.score)))+str(player.score),0,(0,0,0)),(1250,0))
+    #volume control
     if user_input[pygame.K_0]:
         volume=0.0
     if user_input[pygame.K_1]:
@@ -1823,6 +1881,7 @@ while r:
         volume=0.8
     if user_input[pygame.K_9]:
         volume=0.9
+    #cheats
     if user_input[pygame.K_KP1]:
         if player.health!=1:
             player.rect=pygame.Rect(player.rect.x,player.rect.y+50,50,50)
@@ -1844,6 +1903,7 @@ while r:
         else:
             breakpressed=True
         breaktime=time.time()
+    #name change/creation
     if user_input[pygame.K_RETURN]and time.time()-charactertime>1:
         running=True
         name=""
@@ -1982,6 +2042,8 @@ while r:
             screen.blit(player_label,(800-player_label_width,450-player_label_height))
             pygame.display.update()
             pygame.display.flip()
+    #display everything
     pygame.display.update()
     pygame.display.flip()
+#close window
 pygame.quit()
