@@ -6,11 +6,11 @@
                                                                  1                                                                                                                         1
                                                                  2                                                                                              X                          2           
                                                                  2                                                                                              X                          2           
-                             1                                   2           LLL L L LLL L  L  L L LLL L L L                                                    X                          2           
-                             2                                   2           L   L L L   L L   L L L L L L L                                                    X                          2           
-                             2                             1     2           LL  L L L   LL     L  L L L L L           1                                        X                          2             L
-                             2 1                           2     2           L   L L L   L L    L  L L L L             2                                        X                          2            LL
-                             2 2                           2     2           L   LLL LLL L  L   L  LLL LLL L           2                                        X                          2 1         LLL
+                             1                                   2                                                                                              X                          2           
+                             2                                   2                                                                                              X                          2           
+                             2                             1     2                                                     1                                        X                          2             L
+                             2 1                           2     2                                                     2                                        X                          2            LL
+                             2 2                           2     2                                                     2                                        X                          2 1         LLL
                              2 2                           2   1 2                                                     2                                        X                          2 2        LLLL
                              2 2                           2   2 2        QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ        2                                        X                          2 2       LLLLL
                            3 2 2                           2 1 2 2                                                     2 1                                      X                          2 2      LLLLLL       E
