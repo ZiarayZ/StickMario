@@ -5,6 +5,8 @@ Feel Free to change things, it is terribly optimised currently.<br />
 I made the mistake of implementing realtime instead of using frames.<br />
 I may come back to edit and optimise this at a later time.<br />
 The way i store objects and iterate through everything individually is slow.<br />
+Used to have Co-op features over LAN network, but it wasn't implemented well so i removed it.<br />
+Although i kept the naming feature that i implemented with it.<br />
 
 ## CONTROLS
 WASD/Arrow Keys - To Move Around And Enter Pipes <br />
