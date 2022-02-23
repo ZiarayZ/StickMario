@@ -1,6 +1,6 @@
 # STICK MARIO
 Stickman version of Mario. Uses Python and PyGame.<br />
-If you do have Python and PyGame then you can run the python file "CompleteCode.pyw" with the python interpreter.<br />
+If you do have Python and PyGame then you can run the python file "CompleteCode.pyw".<br />
 Feel Free to change things, it is terribly optimised currently.<br />
 I made the mistake of implementing realtime instead of using frames.<br />
 I may come back to edit and optimise this at a later time.<br />
