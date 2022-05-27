@@ -1145,7 +1145,8 @@ pygame.init()
 myfont=pygame.font.SysFont("Arial",30)
 player_label=myfont.render(name,0,(0,0,155))
 #all sound variables defined
-music=pygame.mixer.Sound(folder+"sound/music.wav")
+pygame.mixer.music.load(folder+"sound/music.wav")
+pygame.mixer.music.play(loops=-1)
 pygame.mixer.set_num_channels(8)
 channel0=pygame.mixer.Channel(0)
 channel1=pygame.mixer.Channel(1)
@@ -1287,7 +1288,7 @@ area=1
 level=1
 BOWSERhealth=7
 charactertime=0
-volume=0
+volume=1.0
 breaktime=0
 lifetime=0
 breakpressed=False
@@ -1385,10 +1386,16 @@ while r:
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             r=False
-    #plays reversed mario music on channel0 whilst making sure volume is set correctly each frame
+    #sets volume for all channels and the music channel
     channel0.set_volume(volume)
-    if not channel0.get_busy():
-        channel0.play(music)
+    channel1.set_volume(volume)
+    channel2.set_volume(volume)
+    channel3.set_volume(volume)
+    channel4.set_volume(volume)
+    channel5.set_volume(volume)
+    channel6.set_volume(volume)
+    channel7.set_volume(volume)
+    pygame.mixer.music.set_volume(volume)
     screen.fill((255,255,255))
     #lava/water displays behind blocks and entities, this also makes them have less than one frame delayed movement, looks slightly more fluid
     for lava in lavas:
@@ -1863,41 +1870,43 @@ while r:
     #volume control
     if user_input[pygame.K_0]:
         volume=0.0
-    if user_input[pygame.K_1]:
+    elif user_input[pygame.K_1]:
         volume=0.1
-    if user_input[pygame.K_2]:
+    elif user_input[pygame.K_2]:
         volume=0.2
-    if user_input[pygame.K_3]:
+    elif user_input[pygame.K_3]:
         volume=0.3
-    if user_input[pygame.K_4]:
+    elif user_input[pygame.K_4]:
         volume=0.4
-    if user_input[pygame.K_5]:
+    elif user_input[pygame.K_5]:
         volume=0.5
-    if user_input[pygame.K_6]:
+    elif user_input[pygame.K_6]:
         volume=0.6
-    if user_input[pygame.K_7]:
+    elif user_input[pygame.K_7]:
         volume=0.7
-    if user_input[pygame.K_8]:
+    elif user_input[pygame.K_8]:
         volume=0.8
-    if user_input[pygame.K_9]:
+    elif user_input[pygame.K_9]:
         volume=0.9
+    elif user_input[pygame.K_MINUS]:
+        volume = 1.0
     #cheats
     if user_input[pygame.K_KP1]:
         if player.health!=1:
             player.rect=pygame.Rect(player.rect.x,player.rect.y+50,50,50)
             player.health=1
-    if user_input[pygame.K_KP2]:
+    elif user_input[pygame.K_KP2]:
         if player.health<2:
             player.rect=pygame.Rect(player.rect.x,player.rect.y-50,50,100)
         player.health=2
-    if user_input[pygame.K_KP3]:
+    elif user_input[pygame.K_KP3]:
         if player.health<2:
             player.rect=pygame.Rect(player.rect.x,player.rect.y-50,50,100)
         player.health=3
-    if user_input[pygame.K_KP4]and time.time()-lifetime>0.1:
+    elif user_input[pygame.K_KP4]and time.time()-lifetime>0.1:
         player.lives+=1
         lifetime=time.time()
-    if user_input[pygame.K_KP5]and time.time()-breaktime>1:
+    elif user_input[pygame.K_KP5]and time.time()-breaktime>1:
         if breakpressed:
             breakpressed=False
         else:
