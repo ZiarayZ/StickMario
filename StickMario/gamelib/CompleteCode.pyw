@@ -1022,9 +1022,9 @@ class Lakitu(object):
         self.image=ll
         self.time=0
     def move(self):
-        if self.rect.x-player.rect.x>0:
+        if self.speed > -10 and self.rect.x-player.rect.x>0:
             self.speed-=1
-        if player.rect.x-self.rect.x>0:
+        if self.speed < 10 and player.rect.x-self.rect.x>0:
             self.speed+=1
         if self.speed>0:
             self.rect.x+=self.speed
