@@ -888,11 +888,16 @@ class Blooper(object):
     def move(self):
         self.rect.y-=self.g
         self.g-=0.5
-        if self.g >= -4:
-            if player.rect.y > self.rect.y:
-                self.g = 6
+        if self.g>=-4:
+            if player.rect.y-self.rect.y>0:
+                self.g=6
             else:
-                self.g = 3
+                self.g=3
+        if self.g>0:
+            if self.rect.x-player.rect.x>0:
+                self.rect.x-=self.g
+            elif self.rect.x-player.rect.x<0:
+                self.rect.x+=self.g
 class Podoboo(object):
     def __init__(self,wx,wy):
         self.rect=pygame.Rect(wx,wy,50,50)
