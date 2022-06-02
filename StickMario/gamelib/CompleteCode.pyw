@@ -1732,8 +1732,9 @@ while r:
                 screen.blit(comple.wingimage,(comple.rect.x+30,comple.rect.y))
             elif comple.wings:
                 screen.blit(comple.wingimage,(comple.rect.x+5,comple.rect.y))
-    #bloopers have no movement code
+    #bloopers don't have code for restricting underwater, they may exit water to chase?
     for blooper in bloopers:
+        blooper.move()
         if blooper.rect.y>=0 and blooper.rect.y<=900 and blooper.rect.x>=-50 and blooper.rect.x<=1600:
             screen.blit(blooperimg,(blooper.rect.x,blooper.rect.y))
     #beetles self explanatory
