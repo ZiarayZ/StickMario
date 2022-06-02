@@ -884,6 +884,15 @@ class FireBar(object):
 class Blooper(object):
     def __init__(self,wx,wy):
         self.rect=pygame.Rect(wx,wy,50,50)
+        self.g=0
+    def move(self):
+        self.rect.y-=self.g
+        self.g-=0.5
+        if self.g >= -4:
+            if player.rect.y > self.rect.y:
+                self.g = 6
+            else:
+                self.g = 3
 class Podoboo(object):
     def __init__(self,wx,wy):
         self.rect=pygame.Rect(wx,wy,50,50)
