@@ -884,6 +884,21 @@ class FireBar(object):
 class Blooper(object):
     def __init__(self,wx,wy):
         self.rect=pygame.Rect(wx,wy,50,50)
+        self.g=0
+    def move(self):
+        if self.rect.x>player.rect.x-800 and self.rect.x<player.rect.x+800:
+            self.rect.y-=self.g
+            self.g-=0.5
+            if self.g<=-4:
+                if player.rect.y-self.rect.y<0:
+                    self.g=6
+                else:
+                    self.g=3
+            if self.g>0:
+                if self.rect.x-player.rect.x>0:
+                    self.rect.x-=self.g
+                elif self.rect.x-player.rect.x<0:
+                    self.rect.x+=self.g
 class Podoboo(object):
     def __init__(self,wx,wy):
         self.rect=pygame.Rect(wx,wy,50,50)
@@ -1717,8 +1732,9 @@ while r:
                 screen.blit(comple.wingimage,(comple.rect.x+30,comple.rect.y))
             elif comple.wings:
                 screen.blit(comple.wingimage,(comple.rect.x+5,comple.rect.y))
-    #bloopers have no movement code
+    #bloopers don't have code for restricting underwater, they may exit water to chase?
     for blooper in bloopers:
+        blooper.move()
         if blooper.rect.y>=0 and blooper.rect.y<=900 and blooper.rect.x>=-50 and blooper.rect.x<=1600:
             screen.blit(blooperimg,(blooper.rect.x,blooper.rect.y))
     #beetles self explanatory
