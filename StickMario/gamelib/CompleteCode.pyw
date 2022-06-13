@@ -890,7 +890,7 @@ class Blooper(object):
             self.rect.y-=self.g
             self.g-=0.5
             if self.g<=-4:
-                if player.rect.y-self.rect.y>0:
+                if player.rect.y-self.rect.y<0:
                     self.g=6
                 else:
                     self.g=3
